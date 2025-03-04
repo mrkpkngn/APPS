@@ -17,6 +17,7 @@ long sum_long(long a, long b);
 int sum_int(int a, int b);
 int mystrlen(char* t_str);
 void str2up(char*t_char);
+void minmax_int (int *t_int, int t_N, int *t_min, int *t_max);
 
 int main()
 {
@@ -28,4 +29,10 @@ int main()
     printf("length: %d\n", mystrlen(string));
     str2up(string);
     printf("Upper: %s\n", string);
+
+    int int_array[10] = {-1, 10, -50, 5, -20, 50, -15, 80, -7, 60};
+    int min, max;
+    minmax_int(int_array, 10, &min, &max);
+    printf("min=%d\tmax=%d\n",min, max);
+    return 0;
 }
