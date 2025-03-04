@@ -41,3 +41,23 @@ mystrlen:
 .done:
     ret
 
+    global str2up
+    ; rdi, rsi, rdx,r cx, r8, r9
+    ;*str
+str2up:
+    ;while(*str =! 0)
+.back:
+    cmp [ rdi ], byte 0
+    je .done
+
+    cmp [ rdi ],byte 'a'
+    jl .skip
+    cmp [ rdi ],byte 'z'
+    jg .skip
+
+    sub [ rdi ], byte ( 'a' - 'A' )
+.skip:
+    inc rdi     ;rdi++
+    jmp .back
+.done:
+ret
