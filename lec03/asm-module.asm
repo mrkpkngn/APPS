@@ -97,3 +97,33 @@ minmax_int:
     mov [ rdx ], r8d              ;*min = min
     mov [ rcx ], r9d              ;*max = max
 ret
+
+    global in_range
+    ; rdi, rsi, rdx, rcx, r8, r9
+    ;*arr   N   Fr   To
+in_range:
+enter 0,0
+push rbx
+mov rax, 0  ; counter = 0
+mov rbx, 0  ; index = 0
+movsx rsi, esi  ;N32 to N64
+
+.back:
+cmp rbx, rsi
+jge .done
+
+cmp [rdi + rbx * 8], rdx    ; array[index] < from
+jl .skip
+cmp [rdi + rbx * 8], rcx    ; array[index] > to
+jg .skip
+
+inc rax
+
+.skip:
+inc rbx
+jmp .back
+
+.done:
+pop rbx
+leave
+ret
