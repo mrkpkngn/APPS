@@ -116,7 +116,6 @@ jmp .nextChar
 
 .newChar:
 cmp r8d, r9d
-jge .skipUpdate
 
 mov dl, cl
 mov r8d, r9d
